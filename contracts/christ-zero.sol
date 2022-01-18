@@ -2,6 +2,10 @@ pragma solidity >=0.5.0 <0.9.0;
 
 contract CrossZero {
 
+    event Win(address winner);
+    event NewPlayer(address player);
+    event MadeMove(address player);
+
     address [] players;
     address winner;
 
@@ -12,12 +16,12 @@ contract CrossZero {
     mapping(address => bool) isMoved;
     mapping(uint => mapping(uint => uint)) symbol;
     
-    event Win(address winner);
+    //modifiers
 
     constructor (uint _height, uint _width)
         public
     {
-        require((_height%2 == 1) && (_width%2 == 1) && (_height == _width),"");
+        require((_height%2 == 1) && (_width%2 == 1) && (_height == _width), "Square has to be even square");
         height = _height;
         width = _width;
     }
@@ -26,10 +30,10 @@ contract CrossZero {
         public
     {
         players.push(_player);
+        emit NewPlayer(_player);
     }
 
     //duplication code change
-    //check winner
     //tie between players
     //test does defineWinner() work or not
     function move(uint x, uint y)
@@ -43,6 +47,7 @@ contract CrossZero {
             isOccupied[x][y] = true;
             isMoved[players[0]] = true;
             isMoved[players[1]] = false;
+            emit MadeMove(msg.sender);
         }
 
         if(msg.sender == players[1]) {
@@ -51,6 +56,7 @@ contract CrossZero {
             isOccupied[x][y] = true;
             isMoved[players[1]] = true;
             isMoved[players[0]] = false;
+            emit MadeMove(msg.sender);
         }
     }
 

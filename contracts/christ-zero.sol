@@ -78,6 +78,7 @@ contract CrossZero {
             return "Tie between first player and second player";
         }
     }
+    //change it
     //dublication code
     function countZerosCrosses (uint _h, uint _w)
         private

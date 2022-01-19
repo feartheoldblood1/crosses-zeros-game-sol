@@ -21,7 +21,8 @@ contract CrossZero {
     constructor (uint _height, uint _width)
         public
     {
-        require((_height%2 == 1) && (_width%2 == 1) && (_height == _width), "Square has to be even square");
+        require((_height%2 == 1) && (_width%2 == 1) && (_height == _width),
+            "Square has to be even square");
         height = _height;
         width = _width;
     }
@@ -36,6 +37,7 @@ contract CrossZero {
     //duplication code change
     //tie between players
     //test does defineWinner() work or not
+    //add more requires
     function move(uint x, uint y)
         public
     {    
